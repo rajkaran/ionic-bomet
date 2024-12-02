@@ -1,0 +1,71 @@
+<app-header></app-header>
+
+<ion-content>
+  <ion-grid>
+
+    <h4 class="wx-border-bottom">Settings</h4>
+
+    <form [formGroup]="configForm" (ngSubmit)="onSubmit()" class="ion-margin-top">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Select a Store</ion-label>
+            <ion-select formControlName="store" interfaceOptions="alert" >
+              <ion-select-option *ngFor="let store of stores" [value]="store.key">{{store.displayText}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-toggle color="primary" [checked]="true" formControlName="showScanButton" class="wx-mt-4"></ion-toggle>
+      </ion-row>
+
+      <ion-row formGroupName="scanner">
+        <ion-col class="wx-px-0">
+
+          <ion-row>
+            <ion-col>
+              <ion-item class="wx-w-100">
+                <ion-label position="floating">Server Host name</ion-label>
+                <ion-input formControlName="host" placeholder="ex. 192.168.0.155"></ion-input>
+              </ion-item>
+            </ion-col>
+  
+            <ion-col>
+              <ion-item class="wx-w-100">
+                <ion-label position="floating">Server Port</ion-label>
+                <ion-input formControlName="port" type="number"  placeholder="ex. 7001"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="wx-text-end">
+          <ion-button color="danger" (click)="removeFromStorage()" type="button">CLEAR DATABASE</ion-button>
+          <ion-button color="primary" type="submit">SAVE ALL CHANGES</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-row>
+      <ion-col *ngIf="isPinging" class="wx-text-end">
+        <ion-spinner name="dots"></ion-spinner>
+      </ion-col>
+      <ion-col class="wx-text-end">
+        <ion-button color="medium" (click)="testConnection()" type="button">TEST CONNECTION</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>{{handlerMessage}}</ion-col>
+      <ion-col>{{roleMessage}}</ion-col>
+    </ion-row>
+
+    <ion-row class="wx-sticky-bottom wx-px-2">
+      <ion-col class="wx-text-end"><small class="wx-p-1 wx-border wx-border-radius">{{version}}</small></ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

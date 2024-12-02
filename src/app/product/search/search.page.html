@@ -1,0 +1,98 @@
+<app-header></app-header>
+
+<ion-content tabindex="0" (click)="onViewTap()" (tap)="onViewTap()">
+  <ion-grid>
+
+    <ion-row class="wx-mt-4" *ngIf="config && config.showScanButton">
+      <ion-col>
+        <ion-button color="primary" (click)="onScanBarcodeThroughCamera()" size="large" class="wx-w-100 wx-pr-1-2" [disabled]="!hasConfigured">
+          <ion-icon name="barcode-outline"></ion-icon>
+          <span>SCAN ITEM</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-top wx-scan-input-box wx-text-dark-tint" *ngIf="!inFocus">
+      <ion-col class="ion-text-center">
+        <ion-text color="primary"> <h3 class="wx-fw-bold">Tap Screen to start Scanning</h3> </ion-text></ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="isFetching" class="ion-margin-top wx-scan-input-box ion-justify-content-center">
+      <ion-col size="auto">
+        <ion-card>
+          <ion-card-content>
+            <div class="wx-text-center"><ion-spinner color="warning" name="bubbles"></ion-spinner></div>
+
+            <p>Loading Product details for {{barcode}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="products && inFocus" class="ion-margin-top wx-scan-input-box wx-text-dark-tint">
+      <ion-col class="wx-mx-1">
+        Below are the results for {{findDropDownDisplayText(searchBy)}} <strong>{{barcode}}</strong>
+      </ion-col>
+    </ion-row>
+
+    <ion-card *ngFor="let product of products">
+      <ion-card-header>
+        <ion-card-subtitle>{{ product.departement }}</ion-card-subtitle>
+        <ion-card-title>{{ product.description }}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content class="wx-text-dark-tint">
+        <ion-row>
+          <ion-col><strong>UPC</strong></ion-col>
+          <ion-col>{{product.noarticle}}</ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col><strong>Localisation</strong></ion-col>
+          <ion-col>{{product.localisation}}</ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col><strong>Department</strong></ion-col>
+          <ion-col>{{product.departement}}</ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col><strong>Supplier</strong></ion-col>
+          <ion-col>{{product.fournisseur}}</ion-col>
+        </ion-row>
+  
+        <ion-row class="">
+          <ion-col><strong>Supplier No.</strong></ion-col>
+          <ion-col>{{product.nofournisseur}}</ion-col>
+        </ion-row>
+
+        <ion-row class="">
+          <ion-col><strong>Price</strong></ion-col>
+          <ion-col>{{product.prixvente | currency}}</ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="product.envprixvente != null">
+          <ion-col><strong>Environment Tax</strong></ion-col>
+          <ion-col>{{product.envprixvente | currency}}</ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="product.specialarticle != null">
+          <ion-col><strong>Special price</strong></ion-col>
+          <ion-col>{{product.specialprix | currency}}</ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col class="wx-text-end">
+            <ion-text color="dark">
+              <h1 color="dark">{{addEnvironmentTax(product.prixvente, product.envprixvente, product.specialprix) | currency}}</h1>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  
+  </ion-grid>
+</ion-content>
+
+

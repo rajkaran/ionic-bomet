@@ -1,0 +1,6 @@
+{
+	"appId": "sl.off.scanner",
+	"appName": "Bomet",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

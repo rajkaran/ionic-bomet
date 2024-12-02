@@ -1,0 +1,7 @@
+{
+  "name": "Bomet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
