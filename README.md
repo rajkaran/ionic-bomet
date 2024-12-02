@@ -1,65 +1,24 @@
-# Bomet (Formerly OFF Scanner)
+# Bomet: Revolutionizing In-Store Inventory Management  
 
-## Change application version / Launch new version
-To create a new release on play store you would need to update version code.
-* update versionCode and versionName in `sl-product-scanner\android\app\build.gradle` file.
+**Bomet** is a cutting-edge mobile application built using the **Ionic Framework**, designed specifically for a client who operates multiple stores selling organic products. The app empowers store staff to quickly retrieve product information and streamline inventory management.  
 
-## Debug application
-* For some reason `ionic capacitor run android -l --external` can't find connected devices on Macbook. To make live-reload work from Macbook run below command and then run 'app' from Andriod Studio. `$ ionic capacitor run android -l --external --open`
+By scanning a product's barcode, users can instantly access all the information available on the store's POS system, including pricing, discounts, inventory dates, and shelf movement history. This ensures efficient in-store operations and enhances inventory tracking capabilities.
 
+## Key Highlights  
 
-## Error to tackle
-* `[capacitor] ✖ Updating iOS native dependencies with pod install - failed!`. Although application will work with this issue.
-* `× Running Gradle build - failed!` delete .gradle folder from android.
-* Camera doesn't open instead app crashes on iOS. Add a key-value pair for `NSCameraUsageDescription` and a string to explain the usage. It is the requirement of iOS.
-* WebView showing `ERR_CLEARTEXT_NOT_PERMITTED` add **android:usesCleartextTraffic="true"** in application tag in AndroidManifest.xml file
-* Your device managemnet settings do not allow using apps from developer "Apple Development:rajkaran.chauhan07@gmail.com". 
-    * Go to settings -> General -> Device Management. 
-    * Click on Development App. 
-    * Click on Trust "Apple Development: rajkaran.chauhan07@gmail.com"
+- **Custom-Built Solution**: Designed specifically to meet the needs of a client with multiple stores selling organic products.  
+- **Barcode Scanning**: Instantly scan product barcodes to retrieve detailed data, mirroring the information available to a cashier on the POS.  
+- **Enhanced Inventory Tracking**: Provides insights into when products were added to inventory, when they were moved to shelves, and their current status.  
+- **Store-Specific Data**: Works within the store premises by connecting directly to the server-side POS system.  
+- **Multi-Store Synchronization**: Integrated with SL Drive to sync all POS systems across multiple locations, ensuring seamless access to data from other stores if available.  
+- **Improved Efficiency**: Enables faster decision-making for store staff and improves inventory accuracy.  
 
-## Change App icon and Splash Image
-Create two images app icon and splash screen with sizes 1024X1024 and 2732X2732 respectively. Addition to these images for Android we will have to create two more images of size 432X432 each. Read more [here](https://ionicframework.com/docs/cli/commands/cordova-resources)
-* Upload 4 images two in `resources` directory and other two in `resources/android` directory.
-    * `resources` directory - icon.png and splash.png
-    * `resources/android` directory - icon-background.png and icon-foreground.png
-* Run below commands to generate different sized copies from original images
-```sh
-cordova-res ios --skip-config --copy
-cordova-res android --skip-config --copy
-```
+## Benefits  
+- Eliminates guesswork by providing real-time product data.  
+- Speeds up the process of locating items and checking inventory.  
+- Reduces dependency on manual POS searches, saving staff time and effort.  
+- Enhances inter-store communication with synchronized POS data.  
 
-## Change app name
-In Android
-* Change app_name in `android\app\src\main\res\values\strings.xml` file.
+> **Built in 2022**  
 
-## Debugging
-chrome://inspect/#devices
-
-> switch ruby to latest and Homebrew one chruby 3.1.2
-
-## iOS setup
-XCode - 13
-Target iOS - 12
-Mac OS - 11.6.5
-cocoapods - 1.11.2
-
-## Deploy
-ionic build
-ionic cap add android [optional - don't need if android dir exist]
-ionic cap add ios [optional- don't need if ios dir exist]
-ionic cap copy
-ionic cap sync
-for iOS only
-    chruby 3.1.2
-    cd ios/App
-    pod install
-    cd ../../
-ionic cap open android
-ionic cap open ios
-
-## Create new files
-* ionic g module shared --module=app.module
-* ionic g module product --module=app.module --routing
-* ionic g page product/search --no-module --module=product/product.module
-> delete routing and module file after creating a page as `--no-module` flag isn't working properly. Add page into parent module manually as `--module flag isn't working either`.
+Bomet is more than just an app—it's a transformative tool for organic product retailers, setting a new standard for efficient in-store operations.
